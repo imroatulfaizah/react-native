@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
@@ -17,20 +17,27 @@ export default function App() {
     {name: 'd', key: '4'},
     {name: 'e', key: '5'},
     {name: 'f', key: '6'},
+    
   ]);
+
+  const pressHandler = (id) => {
+    console.log(id);
+    setPeople((prevPeople) => {
+      return prevPeople.filter(person => person.id);
+    });
+  }
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        { people.map((item) => {
-          return (
-            <View key={item.key}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
-          )
-        })}
-
-      </ScrollView>
+      <FlatList 
+      numColumns={2}
+      keyExtractor={(item) => item.id}
+      data={people}
+      renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => pressHandler(item.id)}>
+          <Text style={styles.item}>{item.name}</Text>
+        </TouchableOpacity>
+      )}/>
 
      </View>
 
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
 
   },
   item: {
-    marginTop: 24,
+    marginTop: 60,
     padding: 30,
     backgroundColor: 'pink'
   }
