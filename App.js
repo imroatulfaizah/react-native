@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import AddTodo from './components/addTodo';
@@ -42,6 +42,11 @@ export default function App() {
   }
   
   return (
+    <TouchableWithoutFeedback onPress={() =>  {
+      Keyboard.dismiss;
+      console.log('keyboard dissmiss');
+    }}>
+
     <View style={styles.container}>
       <Header/>
       <View style={styles.content}>
@@ -55,7 +60,9 @@ export default function App() {
         </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
+
 }
 
 const styles = StyleSheet.create({
