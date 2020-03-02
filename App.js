@@ -6,29 +6,40 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+export default function App() {
+  const [name, setName] = useState('Faizah');
+  const [person, setPerson] = useState({name: 'mario', age: 40});
+
+  const clickHandler = () => {
+    setName('Imroatul');
+    setPerson({ name: 'luigi', age:45})
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text>My name is {name}</Text>
+      <Text>His name is {person.name} and his age is {person.age}</Text>
+      <View style={styles.buttonContainer}>
+        <Button title="Update State" onPress={clickHandler}></Button>
+      </View>
+    </View>
+
+  );
+}
 
 const styles = StyleSheet.create({
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'blue',
-  },
-});
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
 
-export default class LotOfStyles extends Component {
-  render() {
-    return (
-      <View>
-        <Text style={styles.red}>Merah</Text>
-        <Text style={styles.bigBlue}>Big Blue</Text>
-        <Text style={styles.bigBlue, styles.red}>Big Blue, then Red</Text>
-        <Text style={styles.red, styles.bigBlue}>red, then bigBlue</Text>
-      </View>
-    )
+  },
+  buttonContainer: {
+    marginTop: 20
   }
-}
+
+});
